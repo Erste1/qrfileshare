@@ -31,7 +31,6 @@ body {
   --green-light: #d1fae5;
 }
 
-/* HEADER / NAV */
 header {
   position: sticky; top: 0; z-index: 100;
   background: rgba(255,255,255,0.92);
@@ -109,7 +108,6 @@ nav {
 }
 .nav-btn:hover { background: var(--accent2); transform: translateY(-1px); }
 
-/* HERO */
 .hero {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -209,7 +207,6 @@ nav {
 }
 .btn-hero-ghost:hover { background: var(--bg); border-color: var(--text3); }
 
-/* STATS BAR */
 .stats-bar {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
@@ -262,7 +259,6 @@ nav {
   margin-top: 3px;
 }
 
-/* MAIN CONTENT */
 .main {
   max-width: 1200px;
   margin: 0 auto;
@@ -289,11 +285,6 @@ nav {
   font-size: 0.82rem;
   color: var(--text3);
 }
-
-/* ============================================================
-   БЛОК ПРОГРАММ — ЗДЕСЬ ДОБАВЛЯЙ НОВЫЕ КАРТОЧКИ
-   Скопируй один <div class="app-card"> и вставь ниже
-   ============================================================ */
 
 .apps-grid {
   display: grid;
@@ -429,7 +420,6 @@ nav {
 }
 .app-dl-btn-ghost:hover { background: var(--bg); color: var(--text); border-color: var(--text3); }
 
-/* NEW BADGE */
 .badge-new {
   position: absolute;
   top: 16px;
@@ -444,14 +434,12 @@ nav {
   border-radius: 4px;
 }
 
-/* DIVIDER SECTION */
 .section-divider {
   border: none;
   border-top: 1px solid var(--border);
   margin: 48px 0;
 }
 
-/* INFO STRIP */
 .info-strip {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -480,7 +468,6 @@ nav {
   line-height: 1.7;
 }
 
-/* FOOTER */
 footer {
   background: var(--surface);
   border-top: 1px solid var(--border);
@@ -518,7 +505,6 @@ footer {
 }
 .footer-links a:hover { color: var(--accent); }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .nav-inner { padding: 0 16px; }
   nav { display: none; }
@@ -533,7 +519,6 @@ footer {
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
 }
 
-/* ANIMATIONS */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: none; }
@@ -549,52 +534,35 @@ footer {
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     ШАПКА САЙТА
-     ═══════════════════════════════════════ -->
 <header>
   <div class="nav-inner">
-
-    <!-- ЛОГОТИП -->
     <a href="#" class="logo">
       <div class="logo-icon">
         <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- ПК монитор (верх-лево) -->
           <rect x="1" y="2" width="16" height="12" rx="2" fill="#0066cc"/>
           <rect x="3" y="4" width="12" height="8" rx="1" fill="#d6e8ff"/>
           <rect x="7" y="14" width="4" height="2" rx="1" fill="#0066cc"/>
           <rect x="5" y="16" width="8" height="1" rx="0.5" fill="#0066cc"/>
-          <!-- Телефон (верх-право) -->
           <rect x="21" y="1" width="9" height="15" rx="2.5" fill="#0052a3"/>
           <rect x="23" y="3.5" width="5" height="9" rx="1" fill="#c2d8f7"/>
           <circle cx="25.5" cy="14" r="1" fill="#d6e8ff"/>
-          <!-- Планшет (низ, по центру) -->
           <rect x="5" y="21" width="22" height="15" rx="2.5" fill="#1a7ae8"/>
           <rect x="7.5" y="23.5" width="17" height="10" rx="1" fill="#d6e8ff"/>
           <circle cx="16" cy="35" r="1.2" fill="#0052a3"/>
-          <!-- Маленький акцент-кружок связи -->
           <circle cx="32" cy="19" r="3" fill="#10b981" opacity="0.9"/>
           <path d="M31 19h2M32 18v2" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
       </div>
       <span class="logo-text">Kronas <span>Project</span></span>
     </a>
-
-    <!-- НАВИГАЦИЯ -->
     <nav>
       <a href="#programs" class="nav-link">Программы</a>
       <a href="#about" class="nav-link">О проекте</a>
     </nav>
-
     <a href="#programs" class="nav-btn">⬇ Скачать</a>
-
   </div>
 </header>
 
-
-<!-- ═══════════════════════════════════════
-     HERO — ГЛАВНЫЙ БЛОК
-     ═══════════════════════════════════════ -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-badge">🛠 Авторские программы</div>
@@ -608,16 +576,11 @@ footer {
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════
-     СТАТИСТИКА
-     ═══════════════════════════════════════ -->
 <div class="stats-bar">
   <div class="stats-inner">
     <div class="stat-item">
       <div class="stat-icon">📦</div>
       <div>
-        <!-- ИЗМЕНИ ЦИФРУ когда добавишь больше программ -->
         <div class="stat-val">4</div>
         <div class="stat-label">Программы</div>
       </div>
@@ -639,20 +602,7 @@ footer {
   </div>
 </div>
 
-
-<!-- ═══════════════════════════════════════
-     ОСНОВНОЙ КОНТЕНТ
-     ═══════════════════════════════════════ -->
 <main class="main">
-
-  <!-- ─────────────────────────────────────
-       БЛОК ПРОГРАММ
-       ─────────────────────────────────────
-       ↓↓↓ СЮДА ДОБАВЛЯЙ НОВЫЕ КАРТОЧКИ ↓↓↓
-       Скопируй блок <div class="app-card">
-       и вставь следующим — заменив текст,
-       ссылку на скачивание и иконку
-       ───────────────────────────────────── -->
 
   <div id="programs">
     <div class="section-header">
@@ -662,19 +612,17 @@ footer {
 
     <div class="apps-grid">
 
-      <!-- ══════════════════════════════════
-           КАРТОЧКА 1 — QR File Share
-           ══════════════════════════════════ -->
-               <div class="app-card reveal">
+      <!-- Layout Switcher -->
+      <div class="app-card reveal">
         <div class="app-card-top">
-          <div class="app-icon app-icon-blue">📲</div>
+          <div class="app-icon app-icon-blue">⌨️</div>
           <div class="app-meta">
             <div class="app-name">Layout Switcher</div>
             <span class="app-version">v1.0</span>
           </div>
         </div>
         <div class="app-desc">
-          Утилита для смена языка при написании - просто жми ctrl+ w и текст тут же смениться на другой язык.
+          Утилита для смены языка при написании — просто жми Ctrl+W и текст тут же сменится на другой язык.
         </div>
         <div class="app-tags">
           <span class="tag">Windows 10–11</span>
@@ -689,10 +637,11 @@ footer {
           </div>
         </div>
       </div>
-      <!-- ══ КОНЕЦ КАРТОЧКИ  ══ -->
-         <div class="app-card reveal">
+
+      <!-- Доска Дел -->
+      <div class="app-card reveal">
         <div class="app-card-top">
-          <div class="app-icon app-icon-blue">📲</div>
+          <div class="app-icon app-icon-purple">📋</div>
           <div class="app-meta">
             <div class="app-name">Доска Дел</div>
             <span class="app-version">v1.0</span>
@@ -709,48 +658,50 @@ footer {
         <div class="app-footer">
           <div class="app-size">EXE · ~2 MB</div>
           <div style="display:flex;gap:8px">
-            <a href="https://github.com/Erste1/Kronas_project/raw/main/ДоскаДел_Setup.exe"
+            <a href="https://github.com/Erste1/Kronas_project/raw/main/%D0%94%D0%BE%D1%81%D0%BA%D0%B0%D0%94%D0%B5%D0%BB_%D0%A1%D0%B5%D1%82%D1%83%D0%BF.exe"
                class="app-dl-btn" download>⬇ Скачать</a>
           </div>
         </div>
       </div>
-      <!-- ══ КОНЕЦ КАРТОЧКИ  ══ -->
+
+      <!-- QR File Share — ИСПРАВЛЕНА ССЫЛКА -->
       <div class="app-card reveal">
         <div class="app-card-top">
-          <div class="app-icon app-icon-blue">📲</div>
+          <div class="app-icon app-icon-green">📲</div>
           <div class="app-meta">
             <div class="app-name">QR File Share</div>
             <span class="app-version">v3.0</span>
           </div>
         </div>
         <div class="app-desc">
-          Передача файлов между Android и Windows через QR-код и Wi-Fi без интернета. AES-256 шифрование , авто-синхронизация фото.
+          Передача файлов между Android и Windows через QR-код и Wi-Fi без интернета. AES-256 шифрование, авто-синхронизация фото.
         </div>
         <div class="app-tags">
           <span class="tag">Windows 7–11</span>
           <span class="tag">Android 7+</span>
           <span class="tag">Без интернета</span>
-          <span class="tag">Бесплатно</span> 
+          <span class="tag">Бесплатно</span>
         </div>
         <div class="app-footer">
           <div class="app-size">EXE · ~3.8 MB</div>
           <div style="display:flex;gap:8px">
-            <a href="https://github.com/Erste1/QRFileShare_Setup_3.0_by_Kronas.exe"
+            <a href="https://github.com/Erste1/Kronas_project/raw/main/QRFileShare_Setup_3.0_by_Kronas.exe"
                class="app-dl-btn" download>⬇ Скачать</a>
           </div>
         </div>
       </div>
-      <!-- ══ КОНЕЦ КАРТОЧКИ  ══ -->
-            <div class="app-card reveal">
+
+      <!-- Speed File -->
+      <div class="app-card reveal">
         <div class="app-card-top">
-          <div class="app-icon app-icon-blue">📲</div>
+          <div class="app-icon app-icon-orange">⚡</div>
           <div class="app-meta">
             <div class="app-name">Speed File</div>
             <span class="app-version">v1.0</span>
           </div>
         </div>
         <div class="app-desc">
-          Передача файлов c Windows на Android и Iphone через QR-код и Wi-Fi без интернета. Только фото и видео .
+          Передача файлов с Windows на Android и iPhone через QR-код и Wi-Fi без интернета. Только фото и видео.
         </div>
         <div class="app-tags">
           <span class="tag">Windows 10–11</span>
@@ -758,31 +709,21 @@ footer {
           <span class="tag">Бесплатно</span>
         </div>
         <div class="app-footer">
-          <div class="app-size">EXE · ~2,1 MB</div>
+          <div class="app-size">EXE · ~2.1 MB</div>
           <div style="display:flex;gap:8px">
             <a href="https://github.com/Erste1/Kronas_project/raw/main/SpeedFile_Setup.exe"
                class="app-dl-btn" download>⬇ Скачать</a>
           </div>
         </div>
       </div>
-      <!-- ══ КОНЕЦ КАРТОЧКИ  ══ -->
-
-
-
 
       <!-- ══ ДОБАВЛЯЙ НОВЫЕ КАРТОЧКИ ЗДЕСЬ ══ -->
 
     </div>
-    <!-- ══ КОНЕЦ apps-grid ══ -->
   </div>
-
 
   <hr class="section-divider">
 
-
-  <!-- ─────────────────────────────────────
-       ИНФОРМАЦИЯ О ПРОЕКТЕ
-       ─────────────────────────────────────-->
   <div id="about">
     <div class="info-strip reveal">
       <div class="info-strip-icon">🧑‍💻</div>
@@ -797,27 +738,23 @@ footer {
 
 </main>
 
-
-<!-- ═══════════════════════════════════════
-     ПОДВАЛ
-     ═══════════════════════════════════════ -->
 <footer>
   <div class="footer-inner">
     <div class="footer-left">
       <svg width="24" height="24" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="2" width="16" height="12" rx="2" fill="#0066cc"/>
-          <rect x="3" y="4" width="12" height="8" rx="1" fill="#d6e8ff"/>
-          <rect x="7" y="14" width="4" height="2" rx="1" fill="#0066cc"/>
-          <rect x="5" y="16" width="8" height="1" rx="0.5" fill="#0066cc"/>
-          <rect x="21" y="1" width="9" height="15" rx="2.5" fill="#0052a3"/>
-          <rect x="23" y="3.5" width="5" height="9" rx="1" fill="#c2d8f7"/>
-          <circle cx="25.5" cy="14" r="1" fill="#d6e8ff"/>
-          <rect x="5" y="21" width="22" height="15" rx="2.5" fill="#1a7ae8"/>
-          <rect x="7.5" y="23.5" width="17" height="10" rx="1" fill="#d6e8ff"/>
-          <circle cx="16" cy="35" r="1.2" fill="#0052a3"/>
-          <circle cx="32" cy="19" r="3" fill="#10b981" opacity="0.9"/>
-          <path d="M31 19h2M32 18v2" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
+        <rect x="1" y="2" width="16" height="12" rx="2" fill="#0066cc"/>
+        <rect x="3" y="4" width="12" height="8" rx="1" fill="#d6e8ff"/>
+        <rect x="7" y="14" width="4" height="2" rx="1" fill="#0066cc"/>
+        <rect x="5" y="16" width="8" height="1" rx="0.5" fill="#0066cc"/>
+        <rect x="21" y="1" width="9" height="15" rx="2.5" fill="#0052a3"/>
+        <rect x="23" y="3.5" width="5" height="9" rx="1" fill="#c2d8f7"/>
+        <circle cx="25.5" cy="14" r="1" fill="#d6e8ff"/>
+        <rect x="5" y="21" width="22" height="15" rx="2.5" fill="#1a7ae8"/>
+        <rect x="7.5" y="23.5" width="17" height="10" rx="1" fill="#d6e8ff"/>
+        <circle cx="16" cy="35" r="1.2" fill="#0052a3"/>
+        <circle cx="32" cy="19" r="3" fill="#10b981" opacity="0.9"/>
+        <path d="M31 19h2M32 18v2" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
       <div>
         <div class="footer-logo">Kronas Project</div>
         <div class="footer-copy">© 2026 — Бесплатно</div>
@@ -830,9 +767,7 @@ footer {
   </div>
 </footer>
 
-
 <script>
-// Анимация появления карточек при скролле
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
