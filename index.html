@@ -1,803 +1,650 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kronas Project</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: #f3f4f6;
-  color: #111827;
-  overflow-x: hidden;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-:root {
-  --bg: #f3f4f6;
-  --surface: #ffffff;
-  --surface2: #f9fafb;
-  --border: #e5e7eb;
-  --text: #111827;
-  --text2: #6b7280;
-  --text3: #9ca3af;
-  --accent: #0066cc;
-  --accent-light: #e8f0fe;
-  --accent2: #0052a3;
-  --green: #10b981;
-  --green-light: #d1fae5;
-}
+  <!-- SEO -->
+  <title>QR File Share — передача файлов через QR-код | Kronas Project</title>
+  <meta name="description" content="QR File Share — бесплатное приложение для передачи файлов между устройствами через QR-код. Работает на Windows и Android. Без кабелей, без облака, без регистрации." />
+  <meta name="keywords" content="QR File Share, QR файлы, передача файлов QR код, QR file transfer, share files QR, Android file share, Windows file share, QR code file transfer app, Kronas Project, qr share, qr fileshare, qr file send, wifi file transfer qr" />
+  <meta name="author" content="Kronas Project" />
+  <link rel="canonical" href="https://erste1.github.io/Kronas_project/" />
 
-header {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
+  <!-- Open Graph -->
+  <meta property="og:title" content="QR File Share — передача файлов через QR-код" />
+  <meta property="og:description" content="Бесплатное приложение для мгновенной передачи файлов через QR-код между Windows и Android." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://erste1.github.io/Kronas_project/" />
+  <meta property="og:image" content="https://erste1.github.io/Kronas_project/assets/og-qrfileshare.png" />
 
-.nav-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 32px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="QR File Share" />
+  <meta name="twitter:description" content="Передавай файлы через QR-код. Бесплатно, без облака." />
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "QR File Share",
+    "operatingSystem": "Windows, Android",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Передача файлов между устройствами через QR-код. Без кабелей и облака.",
+    "author": { "@type": "Organization", "name": "Kronas Project", "url": "https://erste1.github.io/Kronas_project/" }
+  }
+  </script>
 
-.logo-icon {
-  width: 38px; height: 38px;
-  flex-shrink: 0;
-  position: relative;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
-.logo-text {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800;
-  font-size: 1.15rem;
-  letter-spacing: -0.03em;
-  color: var(--text);
-}
-.logo-text span { color: var(--accent); }
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-nav {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
+    :root {
+      --bg: #09090f;
+      --surface: #111118;
+      --surface2: #18181f;
+      --border: rgba(255,255,255,0.07);
+      --accent: #4f8ef7;
+      --accent2: #7c3aed;
+      --accent-glow: rgba(79,142,247,0.25);
+      --text: #f0f0f5;
+      --muted: #8888a0;
+      --radius: 16px;
+    }
 
-.nav-link {
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text2);
-  text-decoration: none;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-.nav-link:hover { color: var(--text); background: var(--bg); }
+    html { scroll-behavior: smooth; }
 
-.nav-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 18px;
-  border-radius: 6px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.2s;
-  border: none;
-  cursor: pointer;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-.nav-btn:hover { background: var(--accent2); transform: translateY(-1px); }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
 
-.hero {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 72px 32px 80px;
-  position: relative;
-  overflow: hidden;
-}
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(9,9,15,0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; color: var(--text); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent); color: #fff; border: none;
+      padding: 10px 22px; border-radius: 10px; font-family: 'Syne', sans-serif;
+      font-weight: 600; font-size: 14px; cursor: pointer; text-decoration: none;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 80% at 100% 50%, rgba(0,102,204,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(16,185,129,0.04) 0%, transparent 60%);
-}
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 120px 24px 80px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(79,142,247,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 80% 80%, rgba(124,58,237,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.3);
+      color: var(--accent); padding: 6px 16px; border-radius: 100px;
+      font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeUp .6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(48px, 8vw, 88px); line-height: 1.05;
+      letter-spacing: -.02em;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      color: var(--muted); font-size: clamp(16px, 2vw, 20px);
+      max-width: 540px; margin: 20px auto 0;
+      animation: fadeUp .7s .2s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      margin-top: 40px;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .btn-primary {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff;
+      padding: 14px 28px; border-radius: 12px;
+      font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 0 32px var(--accent-glow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 40px var(--accent-glow); }
+    .btn-secondary {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--surface2); color: var(--text);
+      padding: 14px 28px; border-radius: 12px;
+      font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px;
+      text-decoration: none; border: 1px solid var(--border);
+      transition: border-color .2s, transform .2s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
 
-.hero-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-}
+    /* Platform pills */
+    .platform-pills {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      margin-top: 28px;
+      animation: fadeUp .7s .4s ease both;
+    }
+    .pill {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--surface2); border: 1px solid var(--border);
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 13px; color: var(--muted);
+    }
 
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  background: var(--accent-light);
-  border: 1px solid rgba(0,102,204,0.2);
-  border-radius: 20px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
+    /* ── MOCKUP ── */
+    .mockup-section {
+      padding: 60px 24px 100px;
+      display: flex; justify-content: center;
+      animation: fadeUp .8s .5s ease both;
+    }
+    .mockup-wrapper {
+      position: relative; display: flex; align-items: flex-end;
+      gap: -20px; justify-content: center;
+    }
+    .phone-mock {
+      width: 220px; height: 420px; border-radius: 34px;
+      background: var(--surface2); border: 2px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+      z-index: 2;
+    }
+    .phone-mock::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(79,142,247,0.05) 0%, transparent 60%);
+    }
+    .pc-mock {
+      width: 380px; height: 240px; border-radius: 16px;
+      background: var(--surface2); border: 2px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; margin-left: -30px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    }
+    .pc-mock::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(124,58,237,0.05) 0%, transparent 60%);
+    }
+    .mock-screen-content {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      padding: 20px; z-index: 1;
+    }
+    .qr-visual {
+      width: 90px; height: 90px;
+      background: var(--bg);
+      border-radius: 12px;
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;
+      padding: 8px; border: 2px solid var(--border);
+    }
+    .qr-cell {
+      border-radius: 1px;
+      background: var(--accent);
+      opacity: 0;
+      animation: qrFill .05s ease forwards;
+    }
+    .mock-label { font-family: 'Syne', sans-serif; font-size: 11px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+    .mock-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); }
+    .progress-bar { width: 80%; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 60%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; }
+    .mock-tag {
+      position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      background: rgba(79,142,247,0.15); border: 1px solid rgba(79,142,247,0.3);
+      color: var(--accent); font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 100px;
+      white-space: nowrap;
+    }
 
-.hero h1 {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
-  color: var(--text);
-  margin-bottom: 18px;
-  max-width: 700px;
-}
+    /* ── FEATURES ── */
+    section { padding: 80px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(28px, 4vw, 42px); line-height: 1.15;
+      letter-spacing: -.02em; margin-bottom: 14px;
+    }
+    .section-sub { color: var(--muted); font-size: 17px; max-width: 520px; }
 
-.hero h1 em {
-  font-style: normal;
-  color: var(--accent);
-}
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px; margin-top: 48px;
+    }
+    .feature-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      transition: border-color .25s, transform .25s;
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; inset: 0; opacity: 0;
+      background: linear-gradient(135deg, rgba(79,142,247,0.06), transparent);
+      transition: opacity .3s;
+    }
+    .feature-card:hover { border-color: rgba(79,142,247,0.3); transform: translateY(-4px); }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(79,142,247,0.12); border: 1px solid rgba(79,142,247,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 16px;
+    }
+    .feature-card h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 8px; }
+    .feature-card p { color: var(--muted); font-size: 14px; line-height: 1.6; }
 
-.hero-sub {
-  font-size: 1.05rem;
-  color: var(--text2);
-  line-height: 1.7;
-  max-width: 520px;
-  margin-bottom: 36px;
-  font-weight: 400;
-}
+    /* ── HOW IT WORKS ── */
+    .how-bg { background: var(--surface); }
+    .steps { display: flex; gap: 0; margin-top: 48px; position: relative; }
+    .steps::before {
+      content: ''; position: absolute; top: 28px; left: 28px; right: 28px; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: .3;
+    }
+    .step { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px; }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px;
+      margin-bottom: 20px; position: relative; z-index: 1;
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+    .step h3 { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 8px; }
+    .step p { color: var(--muted); font-size: 14px; }
 
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+    /* ── DOWNLOAD ── */
+    .download-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px; }
+    .download-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: border-color .25s, transform .25s;
+    }
+    .download-card:hover { border-color: rgba(79,142,247,0.35); transform: translateY(-4px); }
+    .dl-header { display: flex; align-items: center; gap: 14px; }
+    .dl-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+    }
+    .dl-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px; }
+    .dl-platform { color: var(--muted); font-size: 13px; }
+    .dl-desc { color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .dl-meta { display: flex; gap: 20px; }
+    .dl-meta span { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+    .dl-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--accent); color: #fff;
+      padding: 12px 24px; border-radius: 10px;
+      font-family: 'Syne', sans-serif; font-weight: 600; font-size: 14px;
+      text-decoration: none; width: fit-content;
+      transition: opacity .2s; box-shadow: 0 0 20px var(--accent-glow);
+    }
+    .dl-btn:hover { opacity: .85; }
 
-.btn-hero {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 13px 24px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  cursor: pointer;
-  border: none;
-}
+    /* ── OTHER APPS ── */
+    .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 48px; }
+    .app-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: border-color .25s, transform .2s;
+      text-decoration: none; color: inherit;
+    }
+    .app-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+    .app-icon {
+      width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(79,142,247,0.2), rgba(124,58,237,0.2));
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; font-size: 22px;
+    }
+    .app-info { flex: 1; }
+    .app-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+    .app-version {
+      display: inline-block; font-size: 10px; background: rgba(79,142,247,0.1);
+      color: var(--accent); padding: 2px 8px; border-radius: 100px; margin-left: 6px;
+    }
+    .app-desc { color: var(--muted); font-size: 13px; line-height: 1.5; }
 
-.btn-hero-primary {
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(0,102,204,0.28);
-}
-.btn-hero-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,102,204,0.35); }
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 40px 24px; text-align: center;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; margin-bottom: 8px; }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 13px; }
 
-.btn-hero-ghost {
-  background: transparent;
-  color: var(--text);
-  border: 1.5px solid var(--border);
-}
-.btn-hero-ghost:hover { background: var(--bg); border-color: var(--text3); }
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes qrFill {
+      to { opacity: 1; }
+    }
 
-.stats-bar {
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  padding: 0;
-}
-
-.stats-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 32px;
-  display: flex;
-  gap: 0;
-}
-
-.stat-item {
-  flex: 1;
-  padding: 22px 24px;
-  border-right: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.stat-item:last-child { border-right: none; }
-
-.stat-icon {
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  background: var(--accent-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.stat-val {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text);
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-.stat-label {
-  font-size: 0.72rem;
-  color: var(--text3);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-top: 3px;
-}
-
-.main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 56px 32px;
-}
-
-.section-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.section-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text);
-}
-
-.section-subtitle {
-  font-size: 0.82rem;
-  color: var(--text3);
-}
-
-.apps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
-  margin-bottom: 56px;
-}
-
-.app-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-.app-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  transform: translateY(-3px);
-  border-color: rgba(0,102,204,0.25);
-}
-
-.app-card-top {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.app-icon {
-  width: 56px; height: 56px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.7rem;
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.app-icon-blue  { background: linear-gradient(135deg, #0066cc, #004a99); }
-.app-icon-green { background: linear-gradient(135deg, #10b981, #047857); }
-.app-icon-orange{ background: linear-gradient(135deg, #f59e0b, #d97706); }
-.app-icon-purple{ background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
-
-.app-meta { flex: 1; min-width: 0; }
-
-.app-name {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  margin-bottom: 3px;
-}
-
-.app-version {
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  background: var(--green-light);
-  color: var(--green);
-  border-radius: 20px;
-}
-
-.app-desc {
-  font-size: 0.82rem;
-  color: var(--text2);
-  line-height: 1.65;
-}
-
-.app-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.tag {
-  font-size: 0.67rem;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 4px;
-  background: var(--bg);
-  color: var(--text3);
-  border: 1px solid var(--border);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.app-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  margin-top: auto;
-}
-
-.app-size {
-  font-size: 0.72rem;
-  color: var(--text3);
-  font-weight: 500;
-}
-
-.app-dl-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 18px;
-  border-radius: 7px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.2s;
-  white-space: nowrap;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-.app-dl-btn:hover { background: var(--accent2); }
-
-.app-dl-btn-ghost {
-  background: transparent;
-  color: var(--text2);
-  border: 1.5px solid var(--border);
-}
-.app-dl-btn-ghost:hover { background: var(--bg); color: var(--text); border-color: var(--text3); }
-
-.badge-new {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  font-size: 0.6rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 4px;
-}
-
-.section-divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 48px 0;
-}
-
-.info-strip {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 28px 32px;
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  margin-bottom: 56px;
-}
-.info-strip-icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.info-strip-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 5px;
-}
-.info-strip-text {
-  font-size: 0.82rem;
-  color: var(--text2);
-  line-height: 1.7;
-}
-
-footer {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  padding: 36px 32px;
-}
-.footer-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.footer-left { display: flex; align-items: center; gap: 12px; }
-.footer-logo {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: -0.02em;
-}
-.footer-copy {
-  font-size: 0.75rem;
-  color: var(--text3);
-}
-.footer-links {
-  display: flex;
-  gap: 20px;
-}
-.footer-links a {
-  font-size: 0.77rem;
-  color: var(--text3);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.footer-links a:hover { color: var(--accent); }
-
-@media (max-width: 768px) {
-  .nav-inner { padding: 0 16px; }
-  nav { display: none; }
-  .hero { padding: 48px 16px 56px; }
-  .stats-inner { padding: 0 16px; flex-direction: column; gap: 0; }
-  .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 16px 0; }
-  .stat-item:last-child { border-bottom: none; }
-  .main { padding: 40px 16px; }
-  .section-header { flex-direction: column; align-items: flex-start; gap: 4px; }
-  .info-strip { padding: 20px; flex-direction: column; gap: 12px; }
-  footer { padding: 28px 16px; }
-  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: none; }
-}
-.hero-badge { animation: fadeUp 0.5s ease both; animation-delay: 0.05s; }
-.hero h1    { animation: fadeUp 0.5s ease both; animation-delay: 0.12s; }
-.hero-sub   { animation: fadeUp 0.5s ease both; animation-delay: 0.2s; }
-.hero-actions { animation: fadeUp 0.5s ease both; animation-delay: 0.27s; }
-
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.reveal.in { opacity: 1; transform: none; }
-</style>
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .steps { flex-direction: column; gap: 32px; }
+      .steps::before { display: none; }
+      .download-grid { grid-template-columns: 1fr; }
+      .phone-mock { width: 160px; height: 300px; }
+      .pc-mock { width: 280px; height: 180px; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="nav-inner">
-    <a href="#" class="logo">
-      <div class="logo-icon">
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="2" width="16" height="12" rx="2" fill="#0066cc"/>
-          <rect x="3" y="4" width="12" height="8" rx="1" fill="#d6e8ff"/>
-          <rect x="7" y="14" width="4" height="2" rx="1" fill="#0066cc"/>
-          <rect x="5" y="16" width="8" height="1" rx="0.5" fill="#0066cc"/>
-          <rect x="21" y="1" width="9" height="15" rx="2.5" fill="#0052a3"/>
-          <rect x="23" y="3.5" width="5" height="9" rx="1" fill="#c2d8f7"/>
-          <circle cx="25.5" cy="14" r="1" fill="#d6e8ff"/>
-          <rect x="5" y="21" width="22" height="15" rx="2.5" fill="#1a7ae8"/>
-          <rect x="7.5" y="23.5" width="17" height="10" rx="1" fill="#d6e8ff"/>
-          <circle cx="16" cy="35" r="1.2" fill="#0052a3"/>
-          <circle cx="32" cy="19" r="3" fill="#10b981" opacity="0.9"/>
-          <path d="M31 19h2M32 18v2" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <span class="logo-text">Kronas <span>Project</span></span>
-    </a>
-    <nav>
-      <a href="#programs" class="nav-link">Программы</a>
-      <a href="#about" class="nav-link">О проекте</a>
-    </nav>
-    <a href="#programs" class="nav-btn">⬇ Скачать</a>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">📲</div>
+    <span class="nav-logo-text">Kronas Project</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Возможности</a>
+    <a href="#download">Скачать</a>
+    <a href="#apps">Программы</a>
   </div>
-</header>
+  <a href="#download" class="nav-cta">↓ Скачать</a>
+</nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">🛠 Авторские программы</div>
-    <h1>Полезные программы<br>для <em>Windows</em> и Android</h1>
-    <p class="hero-sub">
-      Kronas Project — место, где выходят авторские утилиты. Бесплатно, без лишнего, с открытым исходным кодом.
-    </p>
-    <div class="hero-actions">
-      <a href="#programs" class="btn-hero btn-hero-primary">⬇ Смотреть программы</a>
-    </div>
+  <div class="hero-badge">✦ Авторская программа</div>
+  <h1>QR <span>File</span> Share</h1>
+  <p class="hero-sub">Передавай файлы между телефоном и компьютером одним сканированием QR-кода. Без кабелей, без облака, без регистрации.</p>
+  <div class="hero-actions">
+    <a href="#download" class="btn-primary">
+      <span>↓</span> Скачать бесплатно
+    </a>
+    <a href="https://github.com/erste1/Kronas_project" class="btn-secondary" target="_blank">
+      <span>⌥</span> GitHub
+    </a>
+  </div>
+  <div class="platform-pills">
+    <span class="pill">🪟 Windows</span>
+    <span class="pill">🤖 Android</span>
+    <span class="pill">⚡ Бесплатно</span>
+    <span class="pill">🔓 Открытый код</span>
   </div>
 </section>
 
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item">
-      <div class="stat-icon">📦</div>
-      <div>
-        <div class="stat-val">5</div>
-        <div class="stat-label">Программы</div>
+<!-- MOCKUP -->
+<div class="mockup-section">
+  <div class="mockup-wrapper">
+    <div class="phone-mock">
+      <span class="mock-tag">Android</span>
+      <div class="mock-screen-content">
+        <div class="mock-label">Сканируй QR</div>
+        <div class="qr-visual" id="qrGrid"></div>
+        <div class="mock-title">Готово к приёму</div>
       </div>
     </div>
-    <div class="stat-item">
-      <div class="stat-icon">🖥</div>
-      <div>
-        <div class="stat-val">Windows+Android</div>
-        <div class="stat-label">Платформы</div>
-      </div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-icon">💰</div>
-      <div>
-        <div class="stat-val">FREE</div>
-        <div class="stat-label">Стоимость</div>
+    <div class="pc-mock">
+      <span class="mock-tag">Windows</span>
+      <div class="mock-screen-content">
+        <div class="mock-title">QR File Share</div>
+        <div class="mock-label" style="margin-bottom:8px">Передача файла...</div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+        <div class="mock-label" style="margin-top:6px">document.pdf • 4.2 MB</div>
       </div>
     </div>
   </div>
 </div>
 
-<main class="main">
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <p class="section-label">Возможности</p>
+    <h2 class="section-title">Всё что нужно<br>для передачи файлов</h2>
+    <p class="section-sub">Никаких лишних шагов — просто наведи камеру на QR и файлы уже летят.</p>
 
-  <div id="programs">
-    <div class="section-header">
-      <div class="section-title">Все программы</div>
-      <div class="section-subtitle">Обновляется по мере релизов</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📷</div>
+        <h3>QR-код за секунду</h3>
+        <p>ПК генерирует QR. Телефон сканирует. Соединение установлено — всё в локальной сети.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Приватно и локально</h3>
+        <p>Никаких серверов, никакого облака. Файлы передаются напрямую между устройствами по Wi-Fi.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Высокая скорость</h3>
+        <p>Передача на полной скорости вашей локальной сети — никаких ограничений от внешних сервисов.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📁</div>
+        <h3>Любые файлы</h3>
+        <p>Фото, видео, документы, архивы — любые форматы и любые размеры.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Кроссплатформенно</h3>
+        <p>Windows на ПК, Android на телефоне — больше не нужны провода и iTunes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🆓</div>
+        <h3>Полностью бесплатно</h3>
+        <p>Никаких подписок, рекламы и ограничений. Открытый исходный код на GitHub.</p>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-bg" id="how">
+  <div class="container">
+    <p class="section-label">Как это работает</p>
+    <h2 class="section-title">Три шага — и готово</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Запусти на ПК</h3>
+        <p>Открой QR File Share на Windows и выбери файлы для передачи — появится QR-код.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Сканируй телефоном</h3>
+        <p>Открой приложение на Android и наведи камеру на QR. Оба устройства должны быть в одной Wi-Fi сети.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Получи файлы</h3>
+        <p>Файлы мгновенно появляются на телефоне. Без кабелей и лишних шагов.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download">
+  <div class="container">
+    <p class="section-label">Скачать</p>
+    <h2 class="section-title">QR File Share</h2>
+    <p class="section-sub">Доступно для Windows и Android. Бесплатно.</p>
+
+    <div class="download-grid">
+      <div class="download-card">
+        <div class="dl-header">
+          <div class="dl-icon">🪟</div>
+          <div>
+            <div class="dl-name">Windows</div>
+            <div class="dl-platform">Версия для ПК</div>
+          </div>
+        </div>
+        <div class="dl-desc">Запускай на компьютере, генерируй QR-код и принимай или отправляй файлы на телефон. Не требует установки.</div>
+        <div class="dl-meta">
+          <span>📦 v1.0</span>
+          <span>💻 Windows 10/11</span>
+          <span>🆓 Бесплатно</span>
+        </div>
+        <!-- Замени href на реальную ссылку для скачивания -->
+        <a href="https://github.com/erste1/Kronas_project/releases" class="dl-btn" target="_blank">↓ Скачать .exe</a>
+      </div>
+
+      <div class="download-card">
+        <div class="dl-header">
+          <div class="dl-icon">🤖</div>
+          <div>
+            <div class="dl-name">Android</div>
+            <div class="dl-platform">Мобильная версия</div>
+          </div>
+        </div>
+        <div class="dl-desc">Сканируй QR с ПК и мгновенно получай файлы прямо на телефон. Работает без интернета.</div>
+        <div class="dl-meta">
+          <span>📦 v1.0</span>
+          <span>📱 Android 7+</span>
+          <span>🆓 Бесплатно</span>
+        </div>
+        <!-- Замени href на реальную ссылку -->
+        <a href="https://github.com/erste1/Kronas_project/releases" class="dl-btn" target="_blank">↓ Скачать .apk</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER APPS -->
+<section id="apps" style="background: var(--surface);">
+  <div class="container">
+    <p class="section-label">Другие программы</p>
+    <h2 class="section-title">Все авторские утилиты</h2>
+    <p class="section-sub">Бесплатные инструменты с открытым исходным кодом для Windows и Android.</p>
 
     <div class="apps-grid">
-      
-            <!-- Мокап Мастер -->
-      <div class="app-card reveal">
-        <div class="app-card-top">
-          <div class="app-icon app-icon-blue">📲</div>
-          <div class="app-meta">
-            <div class="app-name">Мокап Мастер</div>
-            <span class="app-version">v1.0</span>
-          </div>
+      <a href="https://erste1.github.io/Kronas_project/" class="app-card">
+        <div class="app-icon">🔢</div>
+        <div class="app-info">
+          <div class="app-name">Мокап Мастер <span class="app-version">v1.0</span></div>
+          <div class="app-desc">Инструмент для создания мокапов интерфейсов. Быстро и просто.</div>
         </div>
-        <div class="app-desc">
-          Мокап Мастер — это инструмент для создания мокапов (макетов) приложений.
+      </a>
+      <a href="https://erste1.github.io/Kronas_project/" class="app-card">
+        <div class="app-icon">⌨️</div>
+        <div class="app-info">
+          <div class="app-name">Layout Switcher <span class="app-version">v1.0</span></div>
+          <div class="app-desc">Утилита для смены языка при написании — просто и без лишнего.</div>
         </div>
-        <div class="app-tags">
-          <span class="tag">Windows 7–11</span>
-          <span class="tag">Без интернета</span>
-          <span class="tag">Бесплатно</span>
+      </a>
+      <a href="https://erste1.github.io/Kronas_project/" class="app-card">
+        <div class="app-icon">📋</div>
+        <div class="app-info">
+          <div class="app-name">Доска Дел <span class="app-version">v1.0</span></div>
+          <div class="app-desc">Приложение для создания и управления списками задач.</div>
         </div>
-        <div class="app-footer">
-          <div class="app-size">EXE · ~2.8 MB</div>
-          <div style="display:flex;gap:8px">
-            <a href="https://github.com/Erste1/Kronas_project/raw/main/МокапМастер_Setup_v1.0.exe"
-               class="app-dl-btn" download>⬇ Скачать</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Layout Switcher -->
-      <div class="app-card reveal">
-        <div class="app-card-top">
-          <div class="app-icon app-icon-blue">⌨️</div>
-          <div class="app-meta">
-            <div class="app-name">Layout Switcher</div>
-            <span class="app-version">v1.0</span>
-          </div>
-        </div>
-        <div class="app-desc">
-          Утилита для смены языка при написании — просто жми Ctrl+W и текст тут же сменится на другой язык.
-        </div>
-        <div class="app-tags">
-          <span class="tag">Windows 10–11</span>
-          <span class="tag">Без интернета</span>
-          <span class="tag">Бесплатно</span>
-        </div>
-        <div class="app-footer">
-          <div class="app-size">EXE · ~2 MB</div>
-          <div style="display:flex;gap:8px">
-            <a href="https://github.com/Erste1/Kronas_project/raw/main/LayoutSwitcher_Setup.exe"
-               class="app-dl-btn" download>⬇ Скачать</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Доска Дел -->
-      <div class="app-card reveal">
-        <div class="app-card-top">
-          <div class="app-icon app-icon-purple">📋</div>
-          <div class="app-meta">
-            <div class="app-name">Доска Дел</div>
-            <span class="app-version">v1.0</span>
-          </div>
-        </div>
-        <div class="app-desc">
-          Приложение позволяет создавать списки дел, распределять задачи по колонкам и следить за своей продуктивностью.
-        </div>
-        <div class="app-tags">
-          <span class="tag">Windows 7–11</span>
-          <span class="tag">Без интернета</span>
-          <span class="tag">Бесплатно</span>
-        </div>
-        <div class="app-footer">
-          <div class="app-size">EXE · ~2 MB</div>
-          <div style="display:flex;gap:8px">
-            <a href="https://github.com/Erste1/Kronas_project/raw/main/ДоскаДел_Setup.exe"
-               class="app-dl-btn" download>⬇ Скачать</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- QR File Share — ИСПРАВЛЕНА ССЫЛКА -->
-      <div class="app-card reveal">
-        <div class="app-card-top">
-          <div class="app-icon app-icon-green">📲</div>
-          <div class="app-meta">
-            <div class="app-name">QR File Share</div>
-            <span class="app-version">v3.0</span>
-          </div>
-        </div>
-        <div class="app-desc">
-          Передача файлов между Android и Windows через QR-код и Wi-Fi без интернета. AES-256 шифрование, авто-синхронизация фото.
-        </div>
-        <div class="app-tags">
-          <span class="tag">Windows 7–11</span>
-          <span class="tag">Android 7+</span>
-          <span class="tag">Без интернета</span>
-          <span class="tag">Бесплатно</span>
-        </div>
-        <div class="app-footer">
-          <div class="app-size">EXE · ~3.8 MB</div>
-          <div style="display:flex;gap:8px">
-            <a href="https://github.com/Erste1/Kronas_project/raw/main/QRFileShare_Setup_3.0_by_Kronas.exe"
-               class="app-dl-btn" download>⬇ Скачать</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Speed File -->
-      <div class="app-card reveal">
-        <div class="app-card-top">
-          <div class="app-icon app-icon-orange">⚡</div>
-          <div class="app-meta">
-            <div class="app-name">Speed File</div>
-            <span class="app-version">v1.0</span>
-          </div>
-        </div>
-        <div class="app-desc">
-          Передача файлов с Windows на Android и iPhone через QR-код и Wi-Fi без интернета. Только фото и видео.
-        </div>
-        <div class="app-tags">
-          <span class="tag">Windows 10–11</span>
-          <span class="tag">Без интернета</span>
-          <span class="tag">Бесплатно</span>
-        </div>
-        <div class="app-footer">
-          <div class="app-size">EXE · ~2.1 MB</div>
-          <div style="display:flex;gap:8px">
-            <a href="https://github.com/Erste1/Kronas_project/raw/main/SpeedFile_Setup.exe"
-               class="app-dl-btn" download>⬇ Скачать</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══ ДОБАВЛЯЙ НОВЫЕ КАРТОЧКИ ЗДЕСЬ ══ -->
-
+      </a>
+    </div>
+    <div style="text-align:center; margin-top:32px;">
+      <a href="https://erste1.github.io/Kronas_project/" class="btn-secondary">Все программы →</a>
     </div>
   </div>
+</section>
 
-  <hr class="section-divider">
-
-  <div id="about">
-    <div class="info-strip reveal">
-      <div class="info-strip-icon">🧑‍💻</div>
-      <div>
-        <div class="info-strip-title">Kronas Project</div>
-        <div class="info-strip-text">
-          Kronas Project — авторские утилиты для повседневных задач. Все программы бесплатны. Если нашли баг или есть идея — kino.play.94@bk.ru
-        </div>
-      </div>
-    </div>
-  </div>
-
-</main>
-
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-left">
-      <svg width="24" height="24" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="1" y="2" width="16" height="12" rx="2" fill="#0066cc"/>
-        <rect x="3" y="4" width="12" height="8" rx="1" fill="#d6e8ff"/>
-        <rect x="7" y="14" width="4" height="2" rx="1" fill="#0066cc"/>
-        <rect x="5" y="16" width="8" height="1" rx="0.5" fill="#0066cc"/>
-        <rect x="21" y="1" width="9" height="15" rx="2.5" fill="#0052a3"/>
-        <rect x="23" y="3.5" width="5" height="9" rx="1" fill="#c2d8f7"/>
-        <circle cx="25.5" cy="14" r="1" fill="#d6e8ff"/>
-        <rect x="5" y="21" width="22" height="15" rx="2.5" fill="#1a7ae8"/>
-        <rect x="7.5" y="23.5" width="17" height="10" rx="1" fill="#d6e8ff"/>
-        <circle cx="16" cy="35" r="1.2" fill="#0052a3"/>
-        <circle cx="32" cy="19" r="3" fill="#10b981" opacity="0.9"/>
-        <path d="M31 19h2M32 18v2" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-      <div>
-        <div class="footer-logo">Kronas Project</div>
-        <div class="footer-copy">© 2026 — Бесплатно</div>
-      </div>
-    </div>
+    <div class="footer-logo">Kronas <span>Project</span></div>
+    <p class="footer-copy" style="margin-bottom:12px;">Авторские утилиты для Windows и Android</p>
     <div class="footer-links">
-      <a href="#programs">Программы</a>
-      <a href="#about">О проекте</a>
+      <a href="https://github.com/erste1/Kronas_project" target="_blank">GitHub</a>
+      <a href="#features">Возможности</a>
+      <a href="#download">Скачать</a>
+      <a href="#apps">Программы</a>
     </div>
+    <!-- SEO hashtags hidden but indexed -->
+    <p style="font-size:11px; color:rgba(255,255,255,0.15); margin-top:16px;">
+      #QRFileShare #QRFileTransfer #FileShare #SendFiles #AndroidWindows #LocalTransfer #KronasProject #QRCode #WiFiTransfer #NoCloud #OpenSource
+    </p>
+    <p class="footer-copy" style="margin-top:8px;">© 2025 Kronas Project — Бесплатно, без лишнего, с открытым кодом</p>
   </div>
 </footer>
 
 <script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Generate QR grid pattern visual
+  const grid = document.getElementById('qrGrid');
+  if (grid) {
+    const pattern = [
+      1,1,1,0,1,1,1,
+      1,0,1,0,1,0,1,
+      1,1,1,1,1,1,1,
+      0,1,0,1,0,0,0,
+      1,1,1,0,1,1,1,
+      1,0,1,0,0,1,0,
+      1,1,1,0,1,0,1,
+    ];
+    pattern.forEach((on, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'qr-cell';
+      if (on) {
+        cell.style.animationDelay = (i * 18) + 'ms';
+      } else {
+        cell.style.background = 'transparent';
+        cell.style.opacity = '1';
+      }
+      grid.appendChild(cell);
+    });
+  }
+
+  // Scroll-triggered fade-in for cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'fadeUp 0.5s ease forwards';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card, .app-card, .download-card, .step').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
 </script>
+
 </body>
 </html>
